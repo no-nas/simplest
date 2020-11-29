@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      - USER=deployer #optional
+      - PASS=password #optional
+    volumes:
+      - /home/lamuguo/transmission/config:/config
+      - /home/lamuguo/transmission/watch:/watch
+      - /home/lamuguo/media:/downloads
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+  emby:
+    image: ghcr.io/linuxserver/emby
+    container_name: emby
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - UMASK_SET=<022>
+    volumes:
+      - /home/lamuguo/emby/config:/config
+      - /home/lamuguo/emby/transcode:/transcode
+      - /home/lamuguo/emby/opt/vc/lib:/opt/vc/lib
+      - /home/lamuguo/media/tvshows:/data/tvshows
+      - /home/lamuguo/media/movies:/data/movies
+      - /home/lamuguo/media/personal:/data/personal
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+    restart: unless-stopped

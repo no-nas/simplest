@@ -1,0 +1,11 @@
+- hosts: nas
+  remote_user: lamuguo
+  tasks:
+  # Run docker-compose.
+  - name: Copying docker-compose.yml
+    template:
+      src: "docker-compose.yml"
+      dest: "docker-compose.yml"
+      mode: 0644
+  - name: Run docker-compose to start services.
+    shell: "docker-compose stop && docker-compose up -d --build"
