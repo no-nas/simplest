@@ -1,3 +1,4 @@
 #!/bin/bash
 
-ansible-playbook deploy.yml -i hosts
+ansible-playbook -i hosts deploy-root.yml
+ansible-playbook -i hosts deploy-lamuguo.yml

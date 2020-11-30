@@ -8,6 +8,8 @@
     apt: upgrade=full
   - name: Install the package "docker.io,docker-compose"
     apt: name=docker.io,docker-compose
+  - name: Install cockpit
+    apt: name=cockpit
 
     # Add one sudoer (lamuguo/wheel). Do we need this?
   - name: Make sure we have a 'wheel' group
